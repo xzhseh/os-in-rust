@@ -1,5 +1,7 @@
 // Use Volatile type to wrap the Buffer preventing the compiler from optimizing it away
 use volatile::Volatile;
+// To support Rust's formatting macros
+use core::fmt;
 
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -54,6 +56,13 @@ pub struct Writer {
     buffer: &'static mut Buffer,
 }
 
+impl fmt::Write for Writer {
+    fn write_str(&mut self, s: &str) -> fmt::Result {
+        self.write_string(s);
+        Ok(())
+    }
+}
+
 impl Writer {
     pub fn write_byte(&mut self, byte: u8) {
         match byte {
@@ -100,6 +109,7 @@ impl Writer {
 }
 
 pub fn print_sth() {
+    use core::fmt::Write;
     let mut writer = Writer {
         column_position: 0,
         color_code: ColorCode::new(Color::Yellow, Color::Blue),
@@ -108,5 +118,6 @@ pub fn print_sth() {
 
     writer.write_byte(b'H');
     writer.write_string("ello ,");
-    writer.write_string("Wörld!");
+    writer.write_string("World! ");
+    write!(writer, "The numbers are {} and {}", 42, 1.0 / 3.0).unwrap();
 }
