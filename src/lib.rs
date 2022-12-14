@@ -7,6 +7,7 @@
 use core::panic::PanicInfo;
 // Hi, it's Michael from TaoYuan Airport, Dec 14.
 // Wish you have a good day :)
+// Across The Great Wall you'll see anything :)
 pub mod serial;
 pub mod vga_buffer;
 
