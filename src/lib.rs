@@ -5,7 +5,8 @@
 #![reexport_test_harness_main = "test_main"]
 
 use core::panic::PanicInfo;
-
+// Hi, it's Michael from TaoYuan Airport, Dec 14.
+// Wish you have a good day :)
 pub mod serial;
 pub mod vga_buffer;
 
